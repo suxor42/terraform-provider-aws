@@ -675,11 +675,11 @@ func (c *Config) Client() (interface{}, error) {
 		}
 	})
 
-	client.kafkaconn.Handlers.Retry.PushBack(func(r *request.Request) {
-		if isAWSErr(r.Error, kafka.ErrCodeTooManyRequestsException, "Too Many Requests") {
-			r.Retryable = aws.Bool(true)
-		}
-	})
+	// client.kafkaconn.Handlers.Retry.PushBack(func(r *request.Request) {
+	// 	if isAWSErr(r.Error, kafka.ErrCodeTooManyRequestsException, "Too Many Requests") {
+	// 		r.Retryable = aws.Bool(true)
+	// 	}
+	// })
 
 	client.kinesisconn.Handlers.Retry.PushBack(func(r *request.Request) {
 		if r.Operation.Name == "CreateStream" {
